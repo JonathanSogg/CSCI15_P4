@@ -18,7 +18,7 @@
 */
 Route::filter('auth', function()
 {
-    if (Auth::guest()) return Redirect::to('home');
+    if (Auth::guest()) return Redirect::to('/');
 });
  
 Route::filter('nonauth', function()
@@ -28,18 +28,25 @@ Route::filter('nonauth', function()
 
 Route::get('/', function() 
 {
-	return View::make('index');
+	return View::make('home.index');
 });
 
 Route::get('about', function() 
 {
-	return View::make('about');
+	return View::make('home.about');
 });
 
 Route::get('photopage', function()
 {
-    $pictures = Auth::user()->pictures()->orderBy('created_at', 'desc')->orderBy('id', 'desc')->get();
+    $pictures = Auth::user()->pictures()->orderBy('created_at', 'desc')->get();
     return View::make('photopage.index', array('pictures' => $pictures));
 });
+
+Route::get('upload', function()
+{
+    return View::make('uploads.uploadForm');
+});
+
+Route::post('upload', 'PictureController@postUpload');
 
 Route::post('authenticate', 'UserController@authenticate');
