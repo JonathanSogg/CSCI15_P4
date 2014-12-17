@@ -15,7 +15,7 @@
             <p>Please don't share anything you don't own the copyright to!</p>
             <p><a href="about" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
         
-		<form class="well" method="POST" action="user/authenticate">
+		<form class="well" method="POST" action="authenticate">
 			<label for="email">Email</label>
 			<input type="email" placeholder="Your Email Address" name="email" id="email" />
 			<label for="password">Password</label>
