@@ -49,4 +49,6 @@ Route::get('upload', function()
 
 Route::post('upload', 'PictureController@postUpload');
 
+Route::get('delete/{id}', array('uses' => 'PictureController@deletePicture', 'as'=>'delete'));
+
 Route::post('authenticate', 'UserController@authenticate');
