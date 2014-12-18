@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddRememberTokenToUsersTable' => $baseDir . '/app/database/migrations/2014_12_18_025022_add_remember_token_to_users_table.php',
+    'AddTimestampsToUserProfiles' => $baseDir . '/app/database/migrations/2014_12_18_051527_add_timestamps_to_user_profiles.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
     'Boris\\CLIOptionsHandler' => $vendorDir . '/d11wtq/boris/lib/Boris/CLIOptionsHandler.php',

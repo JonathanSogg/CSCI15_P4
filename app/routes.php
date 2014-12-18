@@ -29,7 +29,7 @@ Route::get('about', function()
 Route::get('photopage', ['before' => 'auth', function()
 {
     $pictures = Auth::user()->pictures()->orderBy('created_at', 'desc')->get();
-    $profile = Auth::user()->user_profile()->get();
+    $profile = Auth::user()->user_profile()->first();
     return View::make('photopage.index', array('pictures' => $pictures, 'profile' => $profile));
 }]);
 
