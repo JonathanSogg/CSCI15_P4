@@ -7,7 +7,6 @@
             <h1>CSCI15 Project 4!</h1>
             <p>This is my simple photo sharing site inspired by things like imgur or photobucket</p>
             <p>You can share your own pics by uploading them and sharing the link</p>
-            <p><a href="about" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
         
 		<form class="well" method="POST" action="authenticate">
 			<label for="email">Email</label>
