@@ -16,16 +16,6 @@
 	return View::make('hello');
 });
 */
-Route::filter('auth', function()
-{
-    if (Auth::guest()) return Redirect::to('/');
-});
- 
-Route::filter('nonauth', function()
-{
-    if (Auth::guest() == false) return Redirect::to('photopage');
-});
-
 Route::get('/', function() 
 {
 	return View::make('home.index');
@@ -36,19 +26,24 @@ Route::get('about', function()
 	return View::make('home.about');
 });
 
-Route::get('photopage', function()
+Route::get('photopage', ['before' => 'auth', function()
 {
     $pictures = Auth::user()->pictures()->orderBy('created_at', 'desc')->get();
-    return View::make('photopage.index', array('pictures' => $pictures));
-});
+    $profile = Auth::user()->user_profile()->get();
+    return View::make('photopage.index', array('pictures' => $pictures, 'profile' => $profile));
+}]);
 
-Route::get('upload', function()
+Route::get('upload', ['before' => 'auth', function()
 {
     return View::make('uploads.uploadForm');
-});
+}]);
 
-Route::post('upload', 'PictureController@postUpload');
+Route::get('delete/{id}', ['before' => 'auth', 'uses' => 'PictureController@deletePicture', 'as'=>'delete']);
 
-Route::get('delete/{id}', array('uses' => 'PictureController@deletePicture', 'as'=>'delete'));
+Route::get('logoff', ['before' => 'auth', 'uses' => 'UserController@logoff', 'as' => 'logoff']);
 
-Route::post('authenticate', 'UserController@authenticate');
+Route::post('upload', ['before' => 'auth|csrf', 'uses' => 'PictureController@postUpload']);
+
+Route::post('profile', ['before' => 'auth|csrf', 'uses' => 'UserController@editProfile']);
+
+Route::post('authenticate', ['before' => 'csrf', 'uses' => 'UserController@authenticate']);
